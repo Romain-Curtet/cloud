@@ -1,0 +1,228 @@
+/* HEADER */
+header {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
+
+#container-header {
+    min-width: 100%;
+    margin: 0;
+    background-color: #0066ff;
+    color: white;
+}
+
+header .nav {
+    width: 100%;
+}
+
+/* FOOTER */
+
+footer {
+    background-color: #0066ff;
+    min-width: 100%;
+    color: white;
+    position: fixed;
+    bottom: 0;
+    height: 50px;
+    z-index: 2;
+}
+
+#fleche {
+    color: white;
+}
+
+#haut {
+    position: fixed;
+    height: 0.1px;
+    bottom: 30px;
+    right: 30px;
+    font-size: 10px;
+}
+
+#scroll_to_top {
+    position: fixed;
+    width: 25px;
+    height: 20px;
+    bottom: 40px;
+    right: 100px;
+    font-size: 50px;
+}
+
+/* NAVIGATION */
+
+.nav-link:hover {
+    background-color: white;
+    color: #0066ff;
+    text-decoration: none;
+}
+
+.nav-link {
+    color: white;
+    background-color: #0066ff;
+}
+
+/* PAGES */
+
+.container-list {
+    margin: 50px auto 100px auto;
+    text-align: center;
+    z-index: 1;
+}
+
+.title,
+#filter {
+    background-color: white;
+    color: #0066ff;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+h1,
+h4,
+h5 {
+    text-align: center;
+}
+
+h4 {
+    padding-top: 10px;
+}
+
+.liste {
+    display: inline-table;
+}
+
+#ajout {
+    display: block;
+    margin-right: 0;
+}
+
+.row {
+    margin: 0;
+}
+
+/* FILTRE */
+
+.filter1 {
+    width: auto;
+    margin: 0 5px .5rem 5px;
+}
+
+/* FORMULAIRE */
+
+.contact-form {
+    font-size: 20px;
+    color: #0066ff;
+    margin: 0 auto;
+}
+
+.form-control {
+    font-size: 18px;
+    height: 50px;
+    width: 100%;
+    padding: 12px 20px;
+    display: inline-block;
+    border: 1px solid #0066ff;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 12px 20px;
+    display: inline-block;
+    border: 1px solid #0066ff;
+}
+
+.submit {
+    font-weight: bold;
+    background-color: #0066ff;
+    color: white;
+    font-size: 20px;
+    padding: 10px 10px;
+    margin: 25px 0;
+    border: 1px solid #0066ff;
+    border-radius: 3px;
+    width: 40%;
+}
+
+.submit:hover .action:hover {
+    background-color: white;
+    color: #0066ff;
+    border: 1px solid #0066ff;
+    text-decoration: none;
+}
+
+.action {
+    font-weight: bold;
+    background-color: #0066ff;
+    color: white;
+    font-size: 15px;
+    padding: 10px 10px;
+    border: 1px solid #0066ff;
+    border-radius: 3px;
+}
+
+.btn-danger {
+    font-weight: bold;
+    background-color: red;
+    color: white;
+    font-size: 15px;
+    padding: 10px 10px;
+    border: 1px solid red;
+    border-radius: 3px;
+}
+
+.login,
+.password,
+.email,
+.confpswd {
+    margin-top: 20px;
+    background-color: #0066ff;
+    color: white;
+    padding: 7px;
+}
+
+.name {
+    font-weight: bold;
+    height: 105px;
+    width: 250px;
+}
+
+#img {
+    width: 40%;
+}
+
+#modifPhoto {
+    font-size: small;
+}
+
+.quantity {
+    text-align: center;
+    color: #0066ff;
+    width: 80%;
+    padding: 0;
+    margin: 8px 0;
+    /* display: inline-block; */
+    border: 1px solid #0066ff;
+}
+
+.error {
+    color: red;
+    background-color: white;
+}
+
+/* TABLEAU */
+
+.table {
+    text-align: center;
+    color: #0066ff;
+    background-color: white;
+    font-size: 20px;
+    margin: 20px auto;
+}
+
+.table td,
+.table th {
+    vertical-align: middle !important;
+    border: 1px solid #0066ff;
+}
