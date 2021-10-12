@@ -3,6 +3,9 @@
     include("bdd.php");
     $login = $_SESSION["login"];
     $sql = doSQL("SELECT * from compte where login=?", array($login));
+    if (!isset($_SESSION["isConnected"])) {
+        header("Location: index.php");
+    }
     ?>
     <div class="container-list">
         <h1 class="title">Informations</h1>

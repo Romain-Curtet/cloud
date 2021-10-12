@@ -1,6 +1,7 @@
 <?php
 session_start();
 include("bdd.php");
+
 function in_array_r($valeur, $tableau, $strict = false)
 {
     foreach ($tableau as $item) {
@@ -27,6 +28,10 @@ if ($_POST["tache"] == "checkConnect") {
                     $_SESSION["isConnected"] = "Y";
                     $_SESSION["login"] = $login;
                     header("Location: privé.php");
+                } else if ($login == "groupe") {
+                    $_SESSION["isConnected"] = "Y";
+                    $_SESSION["login"] = $login;
+                    header("Location: musique.php");
                 } else {
                     $_SESSION["isConnected"] = "Y";
                     $_SESSION["login"] = $login;
@@ -111,4 +116,77 @@ if ($_POST["tache"] == "checkConnect") {
     doSQL("DELETE from documents_privés where id=:id", $params);
     unlink('documents/' . $document);
     header("Location: documents.php");
+} else if ($_POST["tache"] == "addCourses") {
+    $produit = $_POST['produit'];
+    $importance = $_POST['importance'];
+    $params = array(
+        "produit" => $produit,
+        "importance" => $importance,
+    );
+    doSQL("INSERT into courses (produit, importance) VALUES (:produit, :importance)", $params);
+    header("Location: courses.php");
+} else if ($_POST["tache"] == "updateCourses") {
+    $id = $_POST['id'];
+    $produit = $_POST['produit'];
+    $importance = $_POST['importance'];
+    $params = array(
+        "id" => $id,
+        "produit" => $produit,
+        "importance" => $importance,
+    );
+    $sql = doSQL("UPDATE courses SET produit=:produit, importance=:importance WHERE id=:id", $params);
+    header("Location: courses.php");
+} else if ($_POST["tache"] == "deleteCourses") {
+    $id = $_POST['id'];
+    $params = array("id" => $id);
+    doSQL("DELETE from courses where id=:id", $params);
+    header("Location: courses.php");
+} else if ($_POST["tache"] == "addChanson") {
+    $chanson = $_POST['chanson'];
+    mkdir('./chansons/' . $chanson, 0777);
+    if (isset($_FILES['fichier'])) {
+        if ($_FILES['fichier']['size'] <= 100000000000) {
+            $infosfichier = pathinfo($_FILES['fichier']['name']);
+            $extension_upload = $infosfichier['extension'];
+            $extensions_autorisees = array('JPG', 'jpg', 'jpeg', 'gif', 'png', 'pdf', 'doc', 'docx', 'xls', 'xlsx', 'mp3', 'm4c');
+            if (in_array($extension_upload, $extensions_autorisees)) {
+                move_uploaded_file($_FILES['fichier']['tmp_name'], 'chansons/' . $chanson . '/' . basename($_FILES['fichier']['name']));
+                $fichier = $_FILES['fichier']['name'];
+            }
+        }
+    }
+    $params = array(
+        "chanson" => $chanson,
+        "fichier" => $fichier,
+    );
+    doSQL("INSERT into musique (chanson, fichier) VALUES (:chanson, :fichier)", $params);
+    header("Location: musique.php");
+} else if ($_POST["tache"] == "deleteFichier") {
+    $id = $_POST['id'];
+    $chanson = $_POST['chanson'];
+    $fichier = $_POST['fichier'];
+    $params = array("id" => $id);
+    doSQL("DELETE from musique where id=:id", $params);
+    unlink('chansons/' . $chanson . '/' . $fichier);
+    header("Location: musique.php");
+} else if ($_POST["tache"] == "afficherChanson") {
+    $chanson = $_POST['chanson'];
+    $params = array(
+        "chanson" => $chanson,
+    );
+    $sql = doSQL("SELECT * from musique where chanson ='" . $chanson . "'", $params);
+    foreach ($sql as $row) {
+        echo "<div class='col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 liste'>
+                <input type='text' name='fichier' id='fichier' value='" . $row["fichier"] . "'>
+                <a href='chansons/" . $row["chanson"] . "/" . $row["fichier"] . "' download>Télécharger le document</a>
+                <form action='sendPost.php' method='post' enctype='multipart/form-data'>
+                    <input type='hidden' name='tache' value='deleteFichier'>
+                    <input type='hidden' name='id' value='" . $row['id'] . "'>
+                    <input type='hidden' name='chanson' value='" . $row['chanson'] . "'>
+                    <input type='hidden' name='fichier' value='" . $row['fichier'] . "'>
+                    <input type='submit' class='btn btn-danger' value='Supprimer'>
+                </form>
+                </div>
+                <br>";
+    }
 }

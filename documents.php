@@ -22,23 +22,22 @@
             <?php
             foreach ($sql as $row) {
                 echo "<div class='col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12 liste'>
-                        <table class='table table-bordered'>
-                            <tr>
-                                <input type='text' name='document' id='document' value='" . $row["document"] . "'>
-                            </tr>
-                            <tr>
-                                <a href='documents/" . $row["document"] . "' download>Télécharger le document</a>
-                            </tr>
-                            <tr>
-                                <form action='sendPost.php' method='post' enctype='multipart/form-data'>
+                    <table class='table table-bordered'>
+                        <tr>
+                            <input type='text' name='document' id='document' value='" . $row["document"] . "'>
+                        </tr>
+                        <tr>
+                            <a href='documents/" . $row["document"] . "' download>Télécharger le document</a>
+                        </tr>
+                        <tr>
+                            <form action='sendPost.php' method='post' enctype='multipart/form-data'>
                                 <input type='hidden' name='tache' value='deleteDocument'>
                                 <input type='hidden' name='id' value='" . $row['id'] . "'>
                                 <input type='hidden' name='document' value='" . $row['document'] . "'>
                                 <input type='submit' class='btn btn-danger' value='Supprimer'>
-                                </form>
-                            </tr>
-                        </table>
-                    
+                            </form>
+                        </tr>
+                    </table>
                 </div>";
             } ?>
         </div>
