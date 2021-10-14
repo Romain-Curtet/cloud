@@ -1,11 +1,17 @@
+<?php
+session_start();
+if (!isset($_SESSION['isConnected']) || $_SESSION["login"] != "R&S-CURT") {
+    header("Location: index.php");
+}
+include("header.php");
+include("bdd.php");
+if ($_SESSION["login"] != "R&S-CURT") {
+    header("Location: index.php");
+}
+$sql = doSQL("SELECT * from documents_privés ORDER BY id DESC", array());
+?>
+
 <body>
-    <?php include("header.php");
-    include("bdd.php");
-    if ($_SESSION["login"] != "R&S-CURT") {
-        header("Location: index.php");
-    }
-    $sql = doSQL("SELECT * from documents_privés ORDER BY id DESC", array());
-    ?>
     <div class='container-list'>
         <div class='col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 liste'>
             <form action='sendPost.php' method='post' enctype='multipart/form-data'>

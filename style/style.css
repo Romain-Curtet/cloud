@@ -170,6 +170,13 @@ select {
     border-radius: 3px;
 }
 
+.btn-success {
+    font-weight: bold;
+    font-size: 15px;
+    padding: 10px 10px;
+    border-radius: 3px;
+}
+
 .login,
 .password,
 .email,

@@ -136,10 +136,14 @@ if ($_POST["tache"] == "checkConnect") {
     );
     $sql = doSQL("UPDATE courses SET produit=:produit, importance=:importance WHERE id=:id", $params);
     header("Location: courses.php");
-} else if ($_POST["tache"] == "deleteCourses") {
+} else if ($_POST["tache"] == "checkCourses") {
     $id = $_POST['id'];
-    $params = array("id" => $id);
-    doSQL("DELETE from courses where id=:id", $params);
+    $produit = $_POST['produit'];
+    $params = array(
+        "id" => $id,
+        "produit" => $produit,
+    );
+    $sql = doSQL("UPDATE courses SET produit=:produit, importance='Bon' WHERE id=:id", $params);
     header("Location: courses.php");
 } else if ($_POST["tache"] == "addChanson") {
     $chanson = $_POST['chanson'];
@@ -148,7 +152,7 @@ if ($_POST["tache"] == "checkConnect") {
         if ($_FILES['fichier']['size'] <= 100000000000) {
             $infosfichier = pathinfo($_FILES['fichier']['name']);
             $extension_upload = $infosfichier['extension'];
-            $extensions_autorisees = array('JPG', 'jpg', 'jpeg', 'gif', 'png', 'pdf', 'doc', 'docx', 'xls', 'xlsx', 'mp3', 'm4c');
+            $extensions_autorisees = array('JPG', 'jpg', 'jpeg', 'gif', 'png', 'pdf', 'doc', 'docx', 'xls', 'xlsx', 'mp3', 'm4a');
             if (in_array($extension_upload, $extensions_autorisees)) {
                 move_uploaded_file($_FILES['fichier']['tmp_name'], 'chansons/' . $chanson . '/' . basename($_FILES['fichier']['name']));
                 $fichier = $_FILES['fichier']['name'];

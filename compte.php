@@ -1,12 +1,18 @@
+<?php
+session_start();
+if (!isset($_SESSION['isConnected'])) {
+    header("Location: index.php");
+}
+include("header.php");
+include("bdd.php");
+$login = $_SESSION["login"];
+$sql = doSQL("SELECT * from compte where login=?", array($login));
+if (!isset($_SESSION["isConnected"]) == "N") {
+    header("Location: index.php");
+}
+?>
+
 <body>
-    <?php include("header.php");
-    include("bdd.php");
-    $login = $_SESSION["login"];
-    $sql = doSQL("SELECT * from compte where login=?", array($login));
-    if (!isset($_SESSION["isConnected"])) {
-        header("Location: index.php");
-    }
-    ?>
     <div class="container-list">
         <h1 class="title">Informations</h1>
         <?php

@@ -1,5 +1,9 @@
+<?php
+session_start();
+include("header.php")
+?>
+
 <body>
-    <?php include("header.php") ?>
     <div class="container-list">
         <h1 class="title">Se connecter</h1>
         <?php

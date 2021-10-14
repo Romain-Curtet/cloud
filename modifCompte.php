@@ -1,12 +1,15 @@
+<?php
+session_start();
+if (!isset($_SESSION['isConnected'])) {
+    header("Location: index.php");
+}
+include("header.php");
+include("bdd.php");
+$id = $_POST["id"];
+$sql = doSQL("SELECT * from compte where id = ?", array($id));
+?>
+
 <body>
-    <?php include("header.php");
-    include("bdd.php");
-    $id = $_POST["id"];
-    $sql = doSQL("SELECT * from compte where id = ?", array($id));
-    if (!isset($_SESSION["isConnected"])) {
-        header("Location: index.php");
-    }
-    ?>
     <div class="container-list">
         <h1 class="title">Modifier les informations</h1>
         <?php

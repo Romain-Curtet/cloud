@@ -1,9 +1,15 @@
+<?php
+session_start();
+if (!isset($_SESSION['isConnected']) || $_SESSION["login"] != "groupe") {
+    header("Location: index.php");
+}
+include("header.php");
+include("bdd.php");
+$sql = doSQL("SELECT * from musique", array());
+$sql1 = doSQL("SELECT DISTINCT chanson from musique ORDER BY chanson ASC", array());
+?>
+
 <body>
-    <?php include("header.php");
-    include("bdd.php");
-    $sql = doSQL("SELECT * from musique", array());
-    $sql1 = doSQL("SELECT DISTINCT chanson from musique", array());
-    ?>
     <select name="sort" id="song">
         <option> -- </option>
         <?php
