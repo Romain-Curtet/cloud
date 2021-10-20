@@ -2,7 +2,7 @@
 header {
     position: sticky;
     top: 0;
-    z-index: 2;
+    display: initial;
 }
 
 #container-header {
@@ -64,7 +64,7 @@ footer {
 /* PAGES */
 
 .container-list {
-    margin: 50px auto 100px auto;
+    margin: 50px auto 50px auto;
     text-align: center;
     z-index: 1;
 }
@@ -230,4 +230,8 @@ select {
 .table th {
     vertical-align: middle !important;
     border: 1px solid #0066ff;
+}
+
+.table-courses {
+    margin: 0;
 }
