@@ -27,40 +27,40 @@
                             <h1>Cloud</h1>
                         </div>';
                     if ($_SESSION["login"] == "admin") {
-                        echo "<div class='col-lg-2 col-md-2 col-sm-2'>
-                                <a class='nav-link' href='listeProduits.php'>
+                        echo '<div class="col-lg-2 col-md-2 col-sm-2">
+                                <a class="nav-link" href="listeProduits.php">
                                     <h4>Liste des produits</h4>
                                 </a>
-                                <a class='nav-link' href='listeClients.php'>
+                                <a class="nav-link" href="listeClients.php">
                                     <h4>Liste des clients</h4>
                                 </a>
                             </div>
-                            <div class='col-lg-2 col-md-2 col-sm-2'>
-                                <form class='contact-form' action='compte.php' method='post'>
-                                    <h4><input type='submit' class='nav-link' value='" . htmlspecialchars($_SESSION['login']) . "'></h4>
+                            <div class="col-lg-2 col-md-2 col-sm-2">
+                                <form class="contact-form" action="compte.php" method="post">
+                                    <h4><input type="submit" class="nav-link" value="' . htmlspecialchars($_SESSION['login']) . '"></h4>
                                 </form>
                             </div>
-                            <div class='col-lg-2 col-md-2 col-sm-2'>
-                                <form class='contact-form' action='sendPost.php' method='post'>
-                                    <input type='hidden' name='tache' value='checkDisconnect'>
-                                    <h4><input type='submit' class='nav-link' value='Deconnexion'></h4>
-                                </form>";
+                            <div class="col-lg-2 col-md-2 col-sm-2">
+                                <form class="contact-form" action="sendPost.php" method="post">
+                                    <input type="hidden" name="tache" value="checkDisconnect">
+                                    <h4><input type="submit" class="nav-link" value="Deconnexion"></h4>
+                                </form>';
                     } else {
-                        echo "<div class='col-lg-3 col-md-3 col-sm-3'>
-                                <form class='contact-form' action='compte.php' method='post'>
-                                    <h4><input type='submit' class='nav-link' value='" . htmlspecialchars($_SESSION['login']) . "'></h4>
+                        echo '<div class="col-lg-3 col-md-3 col-sm-3">
+                                <form class="contact-form" action="compte.php" method="post">
+                                    <h4><input type="submit" class="nav-link" value="' . htmlspecialchars($_SESSION['login']) . '"></h4>
                                 </form>
                             </div>
-                            <div class='col-lg-3 col-md-3 col-sm-3'>
-                                <form class='contact-form' action='sendPost.php' method='post'>
-                                    <input type='hidden' name='tache' value='checkDisconnect'>
-                                    <h4><input type='submit' class='nav-link' value='Deconnexion'></h4>
-                                </form>";
+                            <div class="col-lg-3 col-md-3 col-sm-3">
+                                <form class="contact-form" action="sendPost.php" method="post">
+                                    <input type="hidden" name="tache" value="checkDisconnect">
+                                    <h4><input type="submit" class="nav-link" value="Deconnexion"></h4>
+                                </form>';
                     }
                 } else {
-                    echo "<div class='col-lg-12 col-md-12 col-sm-12'>
+                    echo '<div class="col-lg-12 col-md-12 col-sm-12">
                                 <h1>Bienvenue sur le cloud</h1>
-                        </div>";
+                        </div>';
                 }
                 echo '</nav>
         </div>
@@ -70,17 +70,17 @@
                 if (isset($_SESSION["isConnected"]) == "Y") {
                     if ($_SESSION["login"] == "R&S-CURT") {
                         echo '<div class="container" id="container-header">
-                    <div class="row">
-                        <nav class="nav">
-                            <div class="col-lg-6">
-                                <h4><a class="nav-link" href="documents.php">Documents</a></h4>
-                            </div>
-                            <div class="col-lg-6">
-                                <h4><a class="nav-link" href="courses.php">Courses</a></h4>
-                            </div>
-                        </nav>
-                    </div>
-                </div>';
+        <div class="row">
+            <nav class="nav">
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+                    <h4><a class="nav-link" href="documents.php">Documents</a></h4>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+                    <h4><a class="nav-link" href="courses.php">Courses</a></h4>
+                </div>
+            </nav>
+        </div>
+    </div>';
                     }
                 }
                 ?>
