@@ -40,24 +40,24 @@ $sql = doSQL("SELECT * from courses ORDER BY importance DESC, produit ASC", arra
                                     <select name="importance" id="importance">';
                 if ($row["importance"] == "Urgent") {
                     echo '<option value="' . $row["importance"] . '" selected>' . $row["importance"] . '</option>
-                        <option value="Normal">Normal</option>
-                        <option value="Faible">Faible</option>
-                        <option value="Bon">Bon</option>';
+                                        <option value="Normal">Normal</option>
+                                        <option value="Faible">Faible</option>
+                                        <option value="Bon">Bon</option>';
                 } else if ($row["importance"] == "Normal") {
                     echo '<option value="Urgent">Urgent</option>
-                        <option value="' . $row["importance"] . '" selected>' . $row["importance"] . '</option>
-                        <option value="Faible">Faible</option>
-                        <option value="Bon">Bon</option>';
+                                        <option value="' . $row["importance"] . '" selected>' . $row["importance"] . '</option>
+                                        <option value="Faible">Faible</option>
+                                        <option value="Bon">Bon</option>';
                 } else if ($row["importance"] == "Faible") {
                     echo '<option value="Urgent">Urgent</option>
-                        <option value="Normal">Normal</option>
-                        <option value="' . $row["importance"] . '" selected>' . $row["importance"] . '</option>
-                        <option value="Bon">Bon</option>';
+                                        <option value="Normal">Normal</option>
+                                        <option value="' . $row["importance"] . '" selected>' . $row["importance"] . '</option>
+                                        <option value="Bon">Bon</option>';
                 } else if ($row["importance"] == "Bon") {
                     echo '<option value="Urgent">Urgent</option>
-                        <option value="Normal">Normal</option>
-                        <option value="Faible">Faible</option>
-                        <option value="' . $row["importance"] . '" selected>' . $row["importance"] . '</option>';
+                                        <option value="Normal">Normal</option>
+                                        <option value="Faible">Faible</option>
+                                        <option value="' . $row["importance"] . '" selected>' . $row["importance"] . '</option>';
                 }
                 echo '</select>
                                 </td>
