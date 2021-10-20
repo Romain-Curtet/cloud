@@ -8,11 +8,9 @@ include("header.php")
         <h1 class="title">Se connecter</h1>
         <?php
         if (isset($_GET["errorA"]) == true) {
-            echo "
-                    <div class=\"col-md-12 error\"> * Ces informations sont requises</div>" . $compte;
+            echo '<div class="col-md-12 error"> * Ces informations sont requises</div>' . $compte;
         } else if (isset($_GET["errorD"]) == true) {
-            echo "
-                    <div class=\"col-md-12 error\">Le login est le mot de passe ne correspondent pas</div>";
+            echo '<div class="col-md-12 error">Le login est le mot de passe ne correspondent pas</div>';
         }
         ?>
         <form class="contact-form" action="sendPost.php" method="post">
@@ -35,9 +33,9 @@ include("header.php")
         <h1 class="title">Créer un compte</h1>
         <?php
         if (isset($_GET["errorC"]) == true) {
-            echo "<div class=\"col-md-12 error\">Ce login existe déjà. Merci de choisir un nouveau login</div>";
+            echo '<div class="col-md-12 error">Ce login existe déjà. Merci de choisir un nouveau login</div>';
         } else if (isset($_GET["errorB"]) == true) {
-            echo "<div class=\"col-md-12 error\"> * Les mots de passe ne correspondent pas</div>";
+            echo '<div class="col-md-12 error"> * Les mots de passe ne correspondent pas</div>';
         }
         ?>
         <form class="contact-form" action="sendPost.php" method="post">

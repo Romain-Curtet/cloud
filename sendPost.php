@@ -178,19 +178,19 @@ if ($_POST["tache"] == "checkConnect") {
     $params = array(
         "chanson" => $chanson,
     );
-    $sql = doSQL("SELECT * from musique where chanson ='" . $chanson . "'", $params);
+    $sql = doSQL('SELECT * from musique where chanson ="' . $chanson . '"', $params);
     foreach ($sql as $row) {
-        echo "<div class='col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 liste'>
-                <input type='text' name='fichier' id='fichier' value='" . $row["fichier"] . "'>
-                <a href='chansons/" . $row["chanson"] . "/" . $row["fichier"] . "' download>Télécharger le document</a>
-                <form action='sendPost.php' method='post' enctype='multipart/form-data'>
-                    <input type='hidden' name='tache' value='deleteFichier'>
-                    <input type='hidden' name='id' value='" . $row['id'] . "'>
-                    <input type='hidden' name='chanson' value='" . $row['chanson'] . "'>
-                    <input type='hidden' name='fichier' value='" . $row['fichier'] . "'>
-                    <input type='submit' class='btn btn-danger' value='Supprimer'>
+        echo '<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 liste">
+                <input type="text" name="fichier" id="fichier" value="' . $row["fichier"] . '">
+                <a href="chansons/' . $row["chanson"] . '/' . $row["fichier"] . '" download>Télécharger le document</a>
+                <form action="sendPost.php" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="tache" value="deleteFichier">
+                    <input type="hidden" name="id" value="' . $row['id'] . '">
+                    <input type="hidden" name="chanson" value="' . $row['chanson'] . '">
+                    <input type="hidden" name="fichier" value="' . $row['fichier'] . '">
+                    <input type="submit" class="btn btn-danger" value="Supprimer">
                 </form>
                 </div>
-                <br>";
+                <br>';
     }
 }
