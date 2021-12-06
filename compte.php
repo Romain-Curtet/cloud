@@ -1,5 +1,23 @@
 <?php
 session_start();
+setcookie(
+    "login",
+    $_SESSION["login"],
+    [
+        'expires' => time() + 365 * 24 * 3600,
+        'secure' => true,
+        'httponly' => true,
+    ]
+);
+setcookie(
+    "password",
+    $_SESSION["password"],
+    [
+        'expires' => time() + 365 * 24 * 3600,
+        'secure' => true,
+        'httponly' => true,
+    ]
+);
 if (!isset($_SESSION["isConnected"])) {
     header("Location: index.php");
 }
@@ -26,7 +44,7 @@ if (!isset($_SESSION["isConnected"]) == "N") {
                             </tr>
                             <tr>
                                 <td>' . $row["login"] . '</td>
-                                <td>' . $row["mail"] . '</td>
+                                <td>' . $row["email"] . '</td>
                                 <td>
                                     <br>
                                     <form action="modifCompte.php" method="post">
@@ -37,10 +55,13 @@ if (!isset($_SESSION["isConnected"]) == "N") {
                             </tr>
                         </tbody>
                     </table>
-                </div>
-                <div class="col-lg-5 liste">
-                <a class="nav-link" href="index.php">Revenir à la liste des produits</a>
                 </div>';
+            if ($login == "groupe") {
+                echo
+                '<div class="col-lg-7 liste">
+                    <a class="nav-link" href="musique.php">Revenir aux chansons</a>
+                </div>';
+            }
         } ?>
     </div>
     <?php include("footer.php"); ?>
