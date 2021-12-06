@@ -1,5 +1,23 @@
 <?php
 session_start();
+setcookie(
+    "login",
+    $_SESSION["login"],
+    [
+        'expires' => time() + 365 * 24 * 3600,
+        'secure' => true,
+        'httponly' => true,
+    ]
+);
+setcookie(
+    "password",
+    $_SESSION["password"],
+    [
+        'expires' => time() + 365 * 24 * 3600,
+        'secure' => true,
+        'httponly' => true,
+    ]
+);
 if (!isset($_SESSION["isConnected"])) {
     header("Location: index.php");
 }
@@ -27,7 +45,7 @@ $sql = doSQL("SELECT * from compte where id = ?", array($id));
                             </td>
                             <td>
                                 <label for="email">Email</label>
-                                <input type="email" name="email" id="email" value="' . $row["mail"] . '">
+                                <input type="email" name="email" id="email" value="' . $row["email"] . '">
                             </td>
                             <td>
                                 <label for="password">Mot de passe</label>
