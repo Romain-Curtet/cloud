@@ -1,23 +1,5 @@
 <?php
 session_start();
-setcookie(
-    "login",
-    $_SESSION["login"],
-    [
-        'expires' => time() + 365 * 24 * 3600,
-        'secure' => true,
-        'httponly' => true,
-    ]
-);
-setcookie(
-    "password",
-    $_SESSION["password"],
-    [
-        'expires' => time() + 365 * 24 * 3600,
-        'secure' => true,
-        'httponly' => true,
-    ]
-);
 include("bdd.php");
 
 function in_array_r($valeur, $tableau, $strict = false)
@@ -42,6 +24,24 @@ if ($_POST["tache"] == "checkConnect") {
                 $_SESSION["isConnected"] = "Y";
                 $_SESSION["login"] = $login;
                 $_SESSION["password"] = $password;
+                setcookie(
+                    "login",
+                    $login,
+                    [
+                        'expires' => time() + 365 * 24 * 3600,
+                        'secure' => true,
+                        'httponly' => true,
+                    ]
+                );
+                setcookie(
+                    "password",
+                    $password,
+                    [
+                        'expires' => time() + 365 * 24 * 3600,
+                        'secure' => true,
+                        'httponly' => true,
+                    ]
+                );
                 if ($login == "admin") {
                     header("Location: admin.php");
                 } else if ($login == "R&S-CURT") {
@@ -60,6 +60,10 @@ if ($_POST["tache"] == "checkConnect") {
     }
 } else if ($_POST["tache"] == "checkDisconnect") {
     session_destroy();
+    setcookie("login");
+    unset($_COOKIE['login']);
+    setcookie("password");
+    unset($_COOKIE['password']);
     header("Location: index.php");
 } else if ($_POST["tache"] == "addCompte") {
     $login = htmlspecialchars($_POST["login"]);
