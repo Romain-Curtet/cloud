@@ -174,18 +174,19 @@ if ($_POST["tache"] == "checkConnect") {
     header("Location: musique.php");
 } else if ($_POST["tache"] == "updateChanson") {
     $id = htmlspecialchars($_POST['id']);
+    $chanson = htmlspecialchars($_POST['chanson']);
     $style = htmlspecialchars($_POST['style']);
     $vitesse = htmlentities($_POST['vitesse']);
     $difficulte = htmlspecialchars($_POST['difficulte']);
     $params = array(
         "id" => $id,
+        "chanson" => $chanson,
         "style" => $style,
         "vitesse" => $vitesse,
         "difficulte" => $difficulte,
     );
-    print_r($params);
-    doSQL("UPDATE chansons SET style=:style, vitesse=:vitesse, difficulte=:difficulte WHERE id=:id)", $params);
-    //header("Location: musique.php");
+    doSQL("UPDATE chansons AS c, musique AS m SET m.chanson=:chanson, c.titre=:chanson, c.style=:style, c.vitesse=:vitesse, c.difficulte=:difficulte WHERE c.id=:id AND m.chanson=c.titre", $params);
+    header("Location: musique.php");
 } else if ($_POST["tache"] == "addFichier") {
     $chanson = $_POST['chanson'];
     if (isset($_FILES['fichier']) && $_FILES['fichier']['error'] == 0) {
@@ -231,9 +232,10 @@ if ($_POST["tache"] == "checkConnect") {
     } else {
         foreach ($sql1 as $row1) {
             echo '<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 liste">
-                <form action="sendPost.php" method="post" enctype="multipart/form-data">
+            <form action="sendPost.php" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="tache" value="updateChanson">
                 <input type="hidden" name="id" value="' . $row1["id"] . '">
+                <input type="text" name="chanson" value="' . $row1["titre"] . '">
                 <input type="text" name="style" value="' . $row1["style"] . '" placeholder="Style">
                 <input type="text" name="vitesse" value="' . $row1["vitesse"] . '" placeholder="Vitesse">
                 <input type="text" name="difficulte" value="' . $row1["difficulte"] . '" placeholder="Difficulté">
@@ -244,7 +246,7 @@ if ($_POST["tache"] == "checkConnect") {
         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 liste">
             <form action="sendPost.php" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="tache" value="addFichier">
-                <input type="hidden" name="chanson" value="' .  $row1["titre"] . '">
+                <input type="hidden" name="chanson" value="' . $row1["titre"] . '">
                 <input type="file" name="fichier" id="fichier" value="">
                 <input type="submit" class="action" value="Enregistrer">
             </form>
