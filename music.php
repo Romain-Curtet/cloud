@@ -4,11 +4,11 @@ if (!isset($_SESSION["isConnected"]) || $_SESSION["login"] != "groupe") {
     header("Location: index.php");
 }
 include("header.php");
-include("bdd.php");
-$sql = doSQL("SELECT DISTINCT titre from chansons", array());
-$sql1 = doSQL("SELECT DISTINCT style from chansons", array());
-$sql2 = doSQL("SELECT DISTINCT vitesse from chansons", array());
-$sql3 = doSQL("SELECT DISTINCT difficulte from chansons", array());
+include("db.php");
+$sql = doSQL("SELECT DISTINCT titre from songs", array());
+$sql1 = doSQL("SELECT DISTINCT style from songs", array());
+$sql2 = doSQL("SELECT DISTINCT speed from songs", array());
+$sql3 = doSQL("SELECT DISTINCT difficult from songs", array());
 ?>
 
 <body>
@@ -16,7 +16,7 @@ $sql3 = doSQL("SELECT DISTINCT difficulte from chansons", array());
         <option>Chanson</option>
         <?php
         foreach ($sql as $row) {
-            echo '<option name="chanson" value="' . $row["titre"] . '">' . $row["titre"] . '</option>';
+            echo '<option name="song" value="' . $row["title"] . '">' . $row["title"] . '</option>';
         } ?>
     </select>
     <select name="sort" id="style">
@@ -30,14 +30,14 @@ $sql3 = doSQL("SELECT DISTINCT difficulte from chansons", array());
         <option>Vitesse</option>
         <?php
         foreach ($sql2 as $row2) {
-            echo '<option name="vitesse" value="' . $row2["vitesse"] . '">' . $row2["vitesse"] . '</option>';
+            echo '<option name="speed" value="' . $row2["speed"] . '">' . $row2["speed"] . '</option>';
         } ?>
     </select>
     <select name="sort" id="difficult">
         <option>Difficulté</option>
         <?php
         foreach ($sql3 as $row3) {
-            echo '<option name="chanson" value="' . $row3["difficulte"] . '">' . $row3["difficulte"] . '</option>';
+            echo '<option name="difficult" value="' . $row3["difficult"] . '">' . $row3["difficult"] . '</option>';
         }  ?>
     </select>
     <br><br>
@@ -49,12 +49,12 @@ $sql3 = doSQL("SELECT DISTINCT difficulte from chansons", array());
     <?php include("footer.php"); ?>
 
     <script>
-    function ftnChanson() {
+    function ftnSong() {
         $.ajax("sendPost.php", {
             type: "POST",
             data: {
-                tache: "afficherChanson",
-                chanson: song.value,
+                task: "viewSong",
+                song: song.value,
             },
             success: function(resp) {
                 tabAjax.innerHTML = resp;
@@ -62,13 +62,13 @@ $sql3 = doSQL("SELECT DISTINCT difficulte from chansons", array());
         });
     }
     console.log(song.value);
-    song.onclick = ftnChanson;
+    song.onclick = ftnSongs;
 
-    function ftnDifficulte() {
+    function ftnDifficult() {
         $.ajax("sendPost.php", {
             type: "POST",
             data: {
-                tache: "afficherDifficulte",
+                task: "viewDifficult",
                 difficulte: difficult.value,
             },
             success: function(resp) {
@@ -77,13 +77,13 @@ $sql3 = doSQL("SELECT DISTINCT difficulte from chansons", array());
         });
     }
     console.log(difficult.value);
-    difficult.onclick = ftnDifficulte;
+    difficult.onclick = ftnDifficult;
 
     function ftnStyle() {
         $.ajax("sendPost.php", {
             type: "POST",
             data: {
-                tache: "afficherStyle",
+                task: "aviewStyle",
                 style: style.value,
             },
             success: function(resp) {
@@ -94,11 +94,11 @@ $sql3 = doSQL("SELECT DISTINCT difficulte from chansons", array());
     console.log(style.value);
     style.onclick = ftnStyle;
 
-    function ftnVitesse() {
+    function ftnSpeed() {
         $.ajax("sendPost.php", {
             type: "POST",
             data: {
-                tache: "afficherVitesse",
+                task: "viewSpeed",
                 vitesse: speed.value,
             },
             success: function(resp) {
@@ -107,5 +107,5 @@ $sql3 = doSQL("SELECT DISTINCT difficulte from chansons", array());
         });
     }
     console.log(speed.value);
-    speed.onclick = ftnVitesse;
+    speed.onclick = ftnSpeed;
     </script>

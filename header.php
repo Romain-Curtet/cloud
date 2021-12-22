@@ -43,7 +43,7 @@
                             </div>
                             <div class="col-lg-2 col-md-2 col-sm-2">
                                 <form class="contact-form" action="sendPost.php" method="post">
-                                    <input type="hidden" name="tache" value="checkDisconnect">
+                                    <input type="hidden" name="task" value="checkDisconnect">
                                     <h4><input type="submit" class="nav-link" value="Deconnexion"></h4>
                                 </form>';
                     } else {
@@ -54,7 +54,7 @@
                             </div>
                             <div class="col-lg-3 col-md-3 col-sm-3">
                                 <form class="contact-form" action="sendPost.php" method="post">
-                                    <input type="hidden" name="tache" value="checkDisconnect">
+                                    <input type="hidden" name="task" value="checkDisconnect">
                                     <h4><input type="submit" class="nav-link" value="Deconnexion"></h4>
                                 </form>';
                     }
@@ -77,7 +77,7 @@
                     <h4><a class="nav-link" href="documents.php">Documents</a></h4>
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
-                    <h4><a class="nav-link" href="courses.php">Courses</a></h4>
+                    <h4><a class="nav-link" href="shopping.php">Courses</a></h4>
                 </div>
             </nav>
         </div>

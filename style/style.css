@@ -28,11 +28,11 @@ footer {
     z-index: 2;
 }
 
-#fleche {
+#arrow {
     color: white;
 }
 
-#haut {
+#up {
     position: fixed;
     height: 0.1px;
     bottom: 30px;
@@ -87,13 +87,8 @@ h4 {
     padding-top: 10px;
 }
 
-.liste {
+.list {
     display: inline-table;
-}
-
-#ajout {
-    display: block;
-    margin-right: 0;
 }
 
 .row {
@@ -193,21 +188,12 @@ select {
     width: 250px;
 }
 
-#img {
-    width: 40%;
-}
-
-#modifPhoto {
-    font-size: small;
-}
-
 .quantity {
     text-align: center;
     color: #0066ff;
     width: 80%;
     padding: 0;
     margin: 8px 0;
-    /* display: inline-block; */
     border: 1px solid #0066ff;
 }
 
@@ -245,6 +231,6 @@ select {
     border: 1px solid #0066ff;
 }
 
-.table-courses {
+.table-products {
     margin: 0;
 }

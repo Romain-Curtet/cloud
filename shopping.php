@@ -4,18 +4,18 @@ if (!isset($_SESSION["isConnected"]) || $_SESSION["login"] != "R&S-CURT") {
     header("Location: index.php");
 }
 include("header.php");
-include("bdd.php");
-$sql = doSQL("SELECT * from courses ORDER BY importance DESC, produit ASC", array());
+include("db.php");
+$sql = doSQL("SELECT * from products ORDER BY importance DESC, product ASC", array());
 ?>
 
 <body>
     <div class="container-list">
-        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 liste">
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 list">
             <form action="sendPost.php" method="post" enctype="multipart/form-data">
-                <input type="hidden" name="tache" value="addCourses">
+                <input type="hidden" name="task" value="addProducts">
                 <table class="table table-bordered">
                     <tr>
-                        <input type="text" name="produit" id="produit" value="">
+                        <input type="text" name="product" id="product" value="">
                         <select name="importance" id="importance">
                             <option value="Urgent">Urgent</option>
                             <option value="Normal" selected>Normal</option>
@@ -29,12 +29,12 @@ $sql = doSQL("SELECT * from courses ORDER BY importance DESC, produit ASC", arra
         <div>
             <?php
             foreach ($sql as $row) {
-                echo '<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 liste">
-                        <table class="table table-bordered table-courses">
+                echo '<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 list">
+                        <table class="table table-bordered table-products">
                             <tr>
                             <form action="sendPost.php" method="post" enctype="multipart/form-data">
                                 <td>
-                                    <input type="text" name="produit" id="produit" value="' . $row["produit"] . '">
+                                    <input type="text" name="product" id="product" value="' . $row["product"] . '">
                                 </td>
                                 <td>
                                     <select name="importance" id="importance">';
@@ -62,7 +62,7 @@ $sql = doSQL("SELECT * from courses ORDER BY importance DESC, produit ASC", arra
                 echo '</select>
                                 </td>
                                 <td>
-                                    <input type="hidden" name="tache" value="updateCourses">
+                                    <input type="hidden" name="task" value="updateProducts">
                                     <input type="hidden" name="id" value="' . $row["id"] . '">
                                     <input type="submit" class="action" value="Modifier">
                                     
@@ -70,9 +70,9 @@ $sql = doSQL("SELECT * from courses ORDER BY importance DESC, produit ASC", arra
                             </form>
                             <form action="sendPost.php" method="post" enctype="multipart/form-data">
                                 <td>
-                                    <input type="hidden" name="tache" value="checkCourses">
+                                    <input type="hidden" name="task" value="checkProducts">
                                     <input type="hidden" name="id" value="' . $row["id"] . '">
-                                    <input type="hidden" name="produit" value="' . $row["produit"] . '">
+                                    <input type="hidden" name="product" value="' . $row["product"] . '">
                                     <input type="submit" class="btn btn-success" value="OK">
                                 </td>
                             </form>

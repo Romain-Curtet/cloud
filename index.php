@@ -14,7 +14,7 @@ include("header.php");
         }
         ?>
         <form class="contact-form" action="sendPost.php" method="post">
-            <input type="hidden" name="tache" value="checkConnect">
+            <input type="hidden" name="task" value="checkConnect">
             <div class="row">
                 <div class="col-md-6">
                     <label for="login" class="login">Login</label>
@@ -43,7 +43,7 @@ include("header.php");
         }
         ?>
         <form class="contact-form" action="sendPost.php" method="post">
-            <input type="hidden" name="tache" value="addCompte">
+            <input type="hidden" name="task" value="addCompte">
             <div class="row">
                 <div class="col-md-6">
                     <label for="login" class="login">Login</label>

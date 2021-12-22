@@ -4,9 +4,9 @@ if (!isset($_SESSION["isConnected"])) {
     header("Location: index.php");
 }
 include("header.php");
-include("bdd.php");
+include("db.php");
 $id = $_POST["id"];
-$sql = doSQL("SELECT * from compte where id = ?", array($id));
+$sql = doSQL("SELECT * from account where id = ?", array($id));
 ?>
 
 <body>
@@ -14,9 +14,9 @@ $sql = doSQL("SELECT * from compte where id = ?", array($id));
         <h1 class="title">Modifier les informations</h1>
         <?php
         foreach ($sql as $row) {
-            echo '<div class="col-lg-10 liste">
+            echo '<div class="col-lg-10 list">
                 <form action="sendPost.php" method="post">
-                    <input type="hidden" name="tache" value="updateCompte">
+                    <input type="hidden" name="task" value="updateAccount">
                     <input type="hidden" name="id" value="' . $row["id"] . '">
                     <input type="hidden" name="oldpassword" value="' . $row["password"] . '">
                     <table class="table table-bordered">

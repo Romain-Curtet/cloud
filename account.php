@@ -4,9 +4,9 @@ if (!isset($_SESSION["isConnected"])) {
     header("Location: index.php");
 }
 include("header.php");
-include("bdd.php");
+include("db.php");
 $login = $_SESSION["login"];
-$sql = doSQL("SELECT * from compte where login=?", array($login));
+$sql = doSQL("SELECT * from account where login=?", array($login));
 if (!isset($_SESSION["isConnected"]) == "N") {
     header("Location: index.php");
 }
@@ -17,7 +17,7 @@ if (!isset($_SESSION["isConnected"]) == "N") {
         <h1 class="title">Informations</h1>
         <?php
         foreach ($sql as $row) {
-            echo '<div class="col-lg-7 liste">
+            echo '<div class="col-lg-7 list">
                     <table class="table table-bordered">
                         <tbody>
                             <tr>
@@ -29,7 +29,7 @@ if (!isset($_SESSION["isConnected"]) == "N") {
                                 <td>' . $row["email"] . '</td>
                                 <td>
                                     <br>
-                                    <form action="modifCompte.php" method="post">
+                                    <form action="updateAccount.php" method="post">
                                         <input type="hidden" name="id" value="' . $row["id"] . '">
                                         <input type="submit" class="action" value="Modifier">
                                     </form>
@@ -40,8 +40,8 @@ if (!isset($_SESSION["isConnected"]) == "N") {
                 </div>';
             if ($login == "groupe") {
                 echo
-                '<div class="col-lg-7 liste">
-                    <a class="nav-link" href="musique.php">Revenir aux chansons</a>
+                '<div class="col-lg-7 list">
+                    <a class="nav-link" href="music.php">Revenir aux chansons</a>
                 </div>';
             }
         } ?>
