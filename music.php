@@ -5,18 +5,18 @@ if (!isset($_SESSION["isConnected"]) || $_SESSION["login"] != "groupe") {
 }
 include("header.php");
 include("db.php");
-$sql = doSQL("SELECT DISTINCT titre from songs", array());
+$sql = doSQL("SELECT DISTINCT title from songs", array());
 $sql1 = doSQL("SELECT DISTINCT style from songs", array());
 $sql2 = doSQL("SELECT DISTINCT speed from songs", array());
 $sql3 = doSQL("SELECT DISTINCT difficult from songs", array());
 ?>
 
 <body>
-    <select name="sort" id="song">
+    <select name="sort" id="songs">
         <option>Chanson</option>
         <?php
         foreach ($sql as $row) {
-            echo '<option name="song" value="' . $row["title"] . '">' . $row["title"] . '</option>';
+            echo '<option name="songs" value="' . $row["title"] . '">' . $row["title"] . '</option>';
         } ?>
     </select>
     <select name="sort" id="style">
@@ -54,36 +54,34 @@ $sql3 = doSQL("SELECT DISTINCT difficult from songs", array());
             type: "POST",
             data: {
                 task: "viewSong",
-                song: song.value,
+                song: songs.value,
             },
             success: function(resp) {
                 tabAjax.innerHTML = resp;
             }
         });
     }
-    console.log(song.value);
-    song.onclick = ftnSongs;
+    songs.onclick = ftnSong;
 
     function ftnDifficult() {
         $.ajax("sendPost.php", {
             type: "POST",
             data: {
                 task: "viewDifficult",
-                difficulte: difficult.value,
+                difficult: difficult.value,
             },
             success: function(resp) {
                 tabAjax.innerHTML = resp;
             }
         });
     }
-    console.log(difficult.value);
     difficult.onclick = ftnDifficult;
 
     function ftnStyle() {
         $.ajax("sendPost.php", {
             type: "POST",
             data: {
-                task: "aviewStyle",
+                task: "viewStyle",
                 style: style.value,
             },
             success: function(resp) {
@@ -91,7 +89,6 @@ $sql3 = doSQL("SELECT DISTINCT difficult from songs", array());
             }
         });
     }
-    console.log(style.value);
     style.onclick = ftnStyle;
 
     function ftnSpeed() {
@@ -99,13 +96,12 @@ $sql3 = doSQL("SELECT DISTINCT difficult from songs", array());
             type: "POST",
             data: {
                 task: "viewSpeed",
-                vitesse: speed.value,
+                speed: speed.value,
             },
             success: function(resp) {
                 tabAjax.innerHTML = resp;
             }
         });
     }
-    console.log(speed.value);
     speed.onclick = ftnSpeed;
     </script>

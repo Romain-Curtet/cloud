@@ -274,7 +274,7 @@ if ($_POST["task"] == "checkConnect") {
         <br><br>';
         }
     }
-} else if ($_POST["task"] == "aviewStyle") {
+} else if ($_POST["task"] == "viewStyle") {
     $style = $_POST['style'];
     $params = array(
         "style" => $style,
@@ -285,6 +285,7 @@ if ($_POST["task"] == "checkConnect") {
                 <form action="sendPost.php" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="task" value="viewSong">
                 <input type="text" name="song" value="' . $row["title"] . '">
+                <input type="text" name="style" value="' . $row["style"] . '">
                 <input type="text" name="speed" value="' . $row["speed"] . '">
                 <input type="text" name="difficult" value="' . $row["difficult"] . '">
                 <input type="submit" class="action" value="Voir">
@@ -303,6 +304,7 @@ if ($_POST["task"] == "checkConnect") {
                 <form action="sendPost.php" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="task" value="viewSong">
                 <input type="text" name="song" value="' . $row["title"] . '">
+                <input type="text" name="style" value="' . $row["style"] . '">
                 <input type="text" name="speed" value="' . $row["speed"] . '">
                 <input type="text" name="difficult" value="' . $row["difficult"] . '">
                 <input type="submit" class="action" value="Voir">
@@ -310,7 +312,7 @@ if ($_POST["task"] == "checkConnect") {
         </div>
         <br><br>';
     }
-} else if ($_POST["task"] == "aviewDifficult") {
+} else if ($_POST["task"] == "viewDifficult") {
     $difficult = $_POST['difficult'];
     $params = array(
         "difficult" => $difficult,
@@ -321,6 +323,7 @@ if ($_POST["task"] == "checkConnect") {
                 <form action="sendPost.php" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="task" value="viewSong">
                 <input type="text" name="song" value="' . $row["title"] . '">
+                <input type="text" name="style" value="' . $row["style"] . '">
                 <input type="text" name="speed" value="' . $row["speed"] . '">
                 <input type="text" name="difficult" value="' . $row["difficult"] . '">
                 <input type="submit" class="action" value="Voir">
