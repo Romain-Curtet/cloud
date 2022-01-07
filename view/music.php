@@ -3,8 +3,8 @@ session_start();
 if (!isset($_SESSION["isConnected"]) || $_SESSION["login"] != "groupe") {
     header("Location: index.php");
 }
-include("header.php");
-include("db.php");
+require("header.php");
+require("db.php");
 $sql = doSQL("SELECT DISTINCT title from songs", array());
 $sql1 = doSQL("SELECT DISTINCT style from songs", array());
 $sql2 = doSQL("SELECT DISTINCT speed from songs", array());
@@ -46,9 +46,9 @@ $sql3 = doSQL("SELECT DISTINCT difficult from songs", array());
 
         ?>
     </div>
-    <?php include("footer.php"); ?>
+    <?php require("footer.php"); ?>
 
-    <script>
+    <script type="text/javascript">
     function ftnSong() {
         $.ajax("sendPost.php", {
             type: "POST",

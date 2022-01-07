@@ -37,7 +37,7 @@
                                 </a>
                             </div>
                             <div class="col-lg-2 col-md-2 col-sm-2">
-                                <form class="contact-form" action="compte.php" method="post">
+                                <form class="contact-form" action="account.php" method="post">
                                     <h4><input type="submit" class="nav-link" value="' . htmlspecialchars($_SESSION['login']) . '"></h4>
                                 </form>
                             </div>
@@ -48,7 +48,7 @@
                                 </form>';
                     } else {
                         echo '<div class="col-lg-3 col-md-3 col-sm-3">
-                                <form class="contact-form" action="compte.php" method="post">
+                                <form class="contact-form" action="account.php" method="post">
                                     <h4><input type="submit" class="nav-link" value="' . htmlspecialchars($_SESSION['login']) . '"></h4>
                                 </form>
                             </div>

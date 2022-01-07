@@ -3,8 +3,8 @@ session_start();
 if (!isset($_SESSION["isConnected"]) || $_SESSION["login"] != "R&S-CURT") {
     header("Location: index.php");
 }
-include("header.php");
-include("db.php");
+require("header.php");
+require("./db.php");
 if ($_SESSION["login"] != "R&S-CURT") {
     header("Location: index.php");
 }
@@ -15,7 +15,7 @@ $sql = doSQL("SELECT * from private_files ORDER BY id DESC", array());
     <div class="container-list">
         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 list">
             <form action="sendPost.php" method="post" enctype="multipart/form-data">
-                <input type="hidden" name="tache" value="addFile">
+                <input type="hidden" name="task" value="addFile">
                 <table class="table table-bordered">
                     <tr>
                         <input type="file" name="file" id="file" value="">
@@ -33,11 +33,11 @@ $sql = doSQL("SELECT * from private_files ORDER BY id DESC", array());
                             <input type="text" name="file" id="file" value="' . $row["file"] . '">
                         </tr>
                         <tr>
-                            <a href="files/' . $row["file"] . '" download>Télécharger le document</a>
+                            <a href="./public/files/' . $row["file"] . '" download>Télécharger le document</a>
                         </tr>
                         <tr>
                             <form action="sendPost.php" method="post" enctype="multipart/form-data">
-                                <input type="hidden" name="tache" value="deleteFile">
+                                <input type="hidden" name="task" value="deleteFile">
                                 <input type="hidden" name="id" value="' . $row["id"] . '">
                                 <input type="hidden" name="file" value="' . $row["file"] . '">
                                 <input type="submit" class="btn btn-danger" value="Supprimer">
@@ -48,4 +48,4 @@ $sql = doSQL("SELECT * from private_files ORDER BY id DESC", array());
             } ?>
         </div>
     </div>
-    <?php include("footer.php"); ?>
+    <?php require("footer.php"); ?>

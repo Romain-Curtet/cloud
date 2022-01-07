@@ -3,8 +3,8 @@ session_start();
 if (!isset($_SESSION["isConnected"])) {
     header("Location: index.php");
 }
-include("header.php");
-include("db.php");
+require("header.php");
+require("db.php");
 $id = $_POST["id"];
 $sql = doSQL("SELECT * from account where id = ?", array($id));
 ?>
@@ -43,4 +43,4 @@ $sql = doSQL("SELECT * from account where id = ?", array($id));
             </div>';
         } ?>
     </div>
-    <?php include("footer.php"); ?>
+    <?php require("footer.php"); ?>

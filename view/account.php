@@ -3,8 +3,8 @@ session_start();
 if (!isset($_SESSION["isConnected"])) {
     header("Location: index.php");
 }
-include("header.php");
-include("db.php");
+require("header.php");
+require("./db.php");
 $login = $_SESSION["login"];
 $sql = doSQL("SELECT * from account where login=?", array($login));
 if (!isset($_SESSION["isConnected"]) == "N") {
@@ -46,4 +46,4 @@ if (!isset($_SESSION["isConnected"]) == "N") {
             }
         } ?>
     </div>
-    <?php include("footer.php"); ?>
+    <?php require("footer.php"); ?>

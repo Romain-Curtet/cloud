@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("header.php");
+require("header.php");
 ?>
 
 <body>
@@ -43,7 +43,7 @@ include("header.php");
         }
         ?>
         <form class="contact-form" action="sendPost.php" method="post">
-            <input type="hidden" name="task" value="addCompte">
+            <input type="hidden" name="task" value="addAccount">
             <div class="row">
                 <div class="col-md-6">
                     <label for="login" class="login">Login</label>
@@ -77,7 +77,7 @@ include("header.php");
             </div>
         </form>
     </div>
-    <?php include("footer.php"); ?>
+    <?php require("footer.php"); ?>
 
     <script>
     feather.replace();

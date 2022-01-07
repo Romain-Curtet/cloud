@@ -3,8 +3,8 @@ session_start();
 if (!isset($_SESSION["isConnected"]) || $_SESSION["login"] != "R&S-CURT") {
     header("Location: index.php");
 }
-include("header.php");
-include("db.php");
+require("header.php");
+require("db.php");
 $sql = doSQL("SELECT * from products ORDER BY importance DESC, product ASC", array());
 ?>
 
@@ -83,4 +83,4 @@ $sql = doSQL("SELECT * from products ORDER BY importance DESC, product ASC", arr
             } ?>
         </div>
     </div>
-    <?php include("footer.php"); ?>
+    <?php require("footer.php"); ?>
