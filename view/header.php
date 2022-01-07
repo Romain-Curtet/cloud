@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
-    <link rel="stylesheet" href="style\style.css">
+    <link rel="stylesheet" href="../public/style/style.css">
     <script src="https://code.jquery.com/jquery-3.5.1.js"
         integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
@@ -42,7 +42,7 @@
                                 </form>
                             </div>
                             <div class="col-lg-2 col-md-2 col-sm-2">
-                                <form class="contact-form" action="sendPost.php" method="post">
+                                <form class="contact-form" action="../controller/sendPost.php" method="post">
                                     <input type="hidden" name="task" value="checkDisconnect">
                                     <h4><input type="submit" class="nav-link" value="Deconnexion"></h4>
                                 </form>';
@@ -53,7 +53,7 @@
                                 </form>
                             </div>
                             <div class="col-lg-3 col-md-3 col-sm-3">
-                                <form class="contact-form" action="sendPost.php" method="post">
+                                <form class="contact-form" action="../controller/sendPost.php" method="post">
                                     <input type="hidden" name="task" value="checkDisconnect">
                                     <h4><input type="submit" class="nav-link" value="Deconnexion"></h4>
                                 </form>';

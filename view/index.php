@@ -13,7 +13,7 @@ require("header.php");
             echo '<div class="col-md-12 error">Le login est le mot de passe ne correspondent pas</div>';
         }
         ?>
-        <form class="contact-form" action="sendPost.php" method="post">
+        <form class="contact-form" action="../controller/sendPost.php" method="post">
             <input type="hidden" name="task" value="checkConnect">
             <div class="row">
                 <div class="col-md-6">
@@ -42,7 +42,7 @@ require("header.php");
             echo '<div class="col-md-12 error"> * Les mots de passe ne correspondent pas</div>';
         }
         ?>
-        <form class="contact-form" action="sendPost.php" method="post">
+        <form class="contact-form" action="../controller/sendPost.php" method="post">
             <input type="hidden" name="task" value="addAccount">
             <div class="row">
                 <div class="col-md-6">

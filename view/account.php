@@ -1,15 +1,12 @@
 <?php
 session_start();
 if (!isset($_SESSION["isConnected"])) {
-    header("Location: index.php");
+    header("Location: ../index.php");
 }
 require("header.php");
-require("./db.php");
+require("../db.php");
 $login = $_SESSION["login"];
 $sql = doSQL("SELECT * from account where login=?", array($login));
-if (!isset($_SESSION["isConnected"]) == "N") {
-    header("Location: index.php");
-}
 ?>
 
 <body>

@@ -1,12 +1,14 @@
 <?php
 session_start();
-require("./model/model.php");
+ob_start();
+require("../model/model.php");
+ob_end_clean();
 if ($_POST["task"] == "checkConnect") {
     checkConnect($_POST["login"], $_POST["password"]);
 } elseif ($_POST["task"] == "checkDisconnect") {
     checkDisconnect();
 } elseif ($_POST["task"] == "addAccount") {
-    addAccount($_POST["login"], $_POST["password"], $_POST["email"], $_POST["confpswd"]);
+    addAccount($_POST["login"], $_POST["password"], $_POST["email"]);
 } elseif ($_POST["task"] == "updateAccount") {
     updateAccount($_POST['id'], $_POST['login'], $_POST['email'], $_POST['password'], $_POST['oldpassword']);
 } elseif ($_POST["task"] == "addFile") {

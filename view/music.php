@@ -1,10 +1,10 @@
 <?php
 session_start();
 if (!isset($_SESSION["isConnected"]) || $_SESSION["login"] != "groupe") {
-    header("Location: index.php");
+    header("Location: ../index.php");
 }
 require("header.php");
-require("db.php");
+require("../db.php");
 $sql = doSQL("SELECT DISTINCT title from songs", array());
 $sql1 = doSQL("SELECT DISTINCT style from songs", array());
 $sql2 = doSQL("SELECT DISTINCT speed from songs", array());
@@ -50,7 +50,7 @@ $sql3 = doSQL("SELECT DISTINCT difficult from songs", array());
 
     <script type="text/javascript">
     function ftnSong() {
-        $.ajax("sendPost.php", {
+        $.ajax("../controller/sendPost.php", {
             type: "POST",
             data: {
                 task: "viewSong",
@@ -64,7 +64,7 @@ $sql3 = doSQL("SELECT DISTINCT difficult from songs", array());
     songs.onclick = ftnSong;
 
     function ftnDifficult() {
-        $.ajax("sendPost.php", {
+        $.ajax("../controller/sendPost.php", {
             type: "POST",
             data: {
                 task: "viewDifficult",
@@ -78,7 +78,7 @@ $sql3 = doSQL("SELECT DISTINCT difficult from songs", array());
     difficult.onclick = ftnDifficult;
 
     function ftnStyle() {
-        $.ajax("sendPost.php", {
+        $.ajax("../controller/sendPost.php", {
             type: "POST",
             data: {
                 task: "viewStyle",
@@ -92,7 +92,7 @@ $sql3 = doSQL("SELECT DISTINCT difficult from songs", array());
     style.onclick = ftnStyle;
 
     function ftnSpeed() {
-        $.ajax("sendPost.php", {
+        $.ajax("../controller/sendPost.php", {
             type: "POST",
             data: {
                 task: "viewSpeed",

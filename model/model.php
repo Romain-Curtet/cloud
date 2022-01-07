@@ -1,5 +1,5 @@
 ﻿<?php
-require("./db.php");
+require("../db.php");
 
 function in_array_r($valeur, $tableau, $strict = false)
 {
@@ -18,7 +18,7 @@ function checkConnect($login, $password)
         $password = $_POST["password"];
         $account = doSQL("SELECT id, password from account where login=?", array($login));
         if (empty($account)) {
-            header("Location: ./view/index.php?errorA=y");
+            header("Location: ../view/index.php?errorA=y");
         } else {
             if (password_verify($password, $account[0]["password"])) {
                 $_SESSION["isConnected"] = "Y";
@@ -43,20 +43,20 @@ function checkConnect($login, $password)
                     ]
                 );
                 if ($login == "admin") {
-                    header("Location: ./view/admin.php");
+                    header("Location: ../view/admin.php");
                 } else if ($login == "R&S-CURT") {
-                    header("Location: ./view/private.php");
+                    header("Location: ../view/private.php");
                 } else if ($login == "groupe") {
-                    header("Location: music.php");
+                    header("Location: ../view/music.php");
                 } else {
-                    header("Location: ./view/index.php");
+                    header("Location: ../view/index.php");
                 }
             } else {
-                header("Location: ./view/index.php?errorD=y");
+                header("Location: ../view/index.php?errorD=y");
             }
         }
     } else {
-        header("Location: ./view/index.php");
+        header("Location: ../view/index.php");
     }
 }
 
@@ -67,15 +67,14 @@ function checkDisconnect()
     unset($_COOKIE['login']);
     setcookie("password");
     unset($_COOKIE['password']);
-    header("Location: ./view/index.php");
+    header("Location: ../view/index.php");
 }
 
-function addAccount($login, $password, $email, $confpswd)
+function addAccount($login, $password, $email)
 {
     $login = htmlspecialchars($_POST["login"]);
     $password = password_hash($_POST["password"], PASSWORD_BCRYPT);
     $email = $_POST["email"];
-    $confpswd = password_hash($_POST["confpswd"], PASSWORD_BCRYPT);
     $sql = doSQL("SELECT login FROM account", array());
 
     $params = array(
@@ -84,14 +83,14 @@ function addAccount($login, $password, $email, $confpswd)
         "email" => $email
     );
     if (in_array_r($login, $sql)) {
-        header("Location: index.php?errorC=y");
+        header("Location: ../view/index.php?errorC=y");
     } else if ($_POST["password"] == $_POST["confpswd"]) {
         doSQL("INSERT into account (login, password, email) VALUES (:login,:password,:email)", $params);
         $_SESSION["isConnected"] = "Y";
         $_SESSION["login"] = $login;
-        header("Location: ./view/index.php");
+        header("Location: ../view/index.php");
     } else {
-        header("Location: ./view/index.php?errorB=y");
+        header("Location: ../view/index.php?errorB=y");
     }
 }
 
@@ -113,7 +112,7 @@ function updateAccount($id, $login, $email, $password, $oldpassword)
     );
     doSQL("UPDATE account SET login=:login, email=:email, password=:password WHERE id=:id", $params);
     $_SESSION["login"] = $login;
-    header("Location: ./view/account.php");
+    header("Location: ../view/account.php");
 }
 
 function addFile($file)
@@ -124,7 +123,7 @@ function addFile($file)
             $extension_upload = $infosfile['extension'];
             $extensions_autorisees = array('JPG', 'jpg', 'jpeg', 'gif', 'png', 'pdf', 'doc', 'docx', 'xls', 'xlsx');
             if (in_array($extension_upload, $extensions_autorisees)) {
-                move_uploaded_file($_FILES['file']['tmp_name'], './public/files/' . basename($_FILES['file']['name']));
+                move_uploaded_file($_FILES['file']['tmp_name'], '../public/files/' . basename($_FILES['file']['name']));
                 $file = $_FILES['file']['name'];
             }
         }
@@ -133,7 +132,7 @@ function addFile($file)
         "file" => $file,
     );
     doSQL("INSERT into private_files (file) VALUES (:file)", $params);
-    header("Location: ./view/documents.php");
+    header("Location: ../view/documents.php");
 }
 
 function deleteFile($id, $file)
@@ -142,8 +141,8 @@ function deleteFile($id, $file)
     $file = $_POST['file'];
     $params = array("id" => $id);
     doSQL("DELETE from private_files where id=:id", $params);
-    unlink('./public/files/' . $file);
-    header("Location: ./view/documents.php");
+    unlink('../public/files/' . $file);
+    header("Location: ../view/documents.php");
 }
 
 function addProducts($product, $importance)
@@ -155,7 +154,7 @@ function addProducts($product, $importance)
         "importance" => $importance,
     );
     doSQL("INSERT into products (product, importance) VALUES (:product, :importance)", $params);
-    header("Location: ./view/shopping.php");
+    header("Location: ../view/shopping.php");
 }
 
 function updateProducts($id, $product, $importance)
@@ -169,7 +168,7 @@ function updateProducts($id, $product, $importance)
         "importance" => $importance,
     );
     doSQL("UPDATE products SET product=:product, importance=:importance WHERE id=:id", $params);
-    header("Location: ./view/shopping.php");
+    header("Location: ../view/shopping.php");
 }
 
 function checkProducts($id, $product)
@@ -181,7 +180,7 @@ function checkProducts($id, $product)
         "product" => $product,
     );
     doSQL("UPDATE products SET product=:product, importance='Bon' WHERE id=:id", $params);
-    header("Location: ./view/shopping.php");
+    header("Location: ../view/shopping.php");
 }
 
 function addSong($song, $style, $speed, $difficult)
@@ -190,7 +189,7 @@ function addSong($song, $style, $speed, $difficult)
     $style = htmlspecialchars($_POST['style']);
     $speed = htmlspecialchars($_POST['speed']);
     $difficult = htmlspecialchars($_POST['difficult']);
-    mkdir('./public/songs/' . $song, 0777);
+    mkdir('../public/songs/' . $song, 0777);
     $params = array(
         "song" => $song,
         "style" => $style,
@@ -198,7 +197,7 @@ function addSong($song, $style, $speed, $difficult)
         "difficult" => $difficult,
     );
     doSQL("INSERT into songs (title, style, speed, difficult) VALUES (:song, :style, :speed, :difficult)", $params);
-    header("Location: ./view/music.php");
+    header("Location: ../view/music.php");
 }
 
 function updateSong($id, $song, $style, $speed, $difficult)
@@ -221,7 +220,7 @@ function updateSong($id, $song, $style, $speed, $difficult)
     } else {
         doSQL("UPDATE songs SET title=:song, style=:style, speed=:speed, difficult=:difficult WHERE id=:id", $params);
     }
-    header("Location: ./view/music.php");
+    header("Location: ../view/music.php");
 }
 
 function addSongFile($song, $file)
@@ -233,7 +232,7 @@ function addSongFile($song, $file)
             $extension_upload = $infosfile['extension'];
             $extensions_autorisees = array('JPG', 'jpg', 'jpeg', 'gif', 'png', 'pdf', 'doc', 'docx', 'xls', 'xlsx', 'mp3', 'm4a');
             if (in_array($extension_upload, $extensions_autorisees)) {
-                move_uploaded_file($_FILES['file']['tmp_name'], './public/songs/' . $song . '/' . basename($_FILES["file"]["name"]));
+                move_uploaded_file($_FILES['file']['tmp_name'], '../public/songs/' . $song . '/' . basename($_FILES["file"]["name"]));
                 $file = $_FILES['file']['name'];
             }
         }
@@ -243,7 +242,7 @@ function addSongFile($song, $file)
         "file" => $file,
     );
     doSQL("INSERT into music (song, file) VALUES (:song, :file)", $params);
-    header("Location: ./view/music.php");
+    header("Location: ../view/music.php");
 }
 
 function deleteSongFile($id, $song, $file)
@@ -253,8 +252,8 @@ function deleteSongFile($id, $song, $file)
     $file = $_POST['file'];
     $params = array("id" => $id);
     doSQL("DELETE from music where id=:id", $params);
-    unlink('./public/songs/' . $song . '/' . $file);
-    header("Location: ./view/music.php");
+    unlink('../public/songs/' . $song . '/' . $file);
+    header("Location: ../view/music.php");
 }
 
 function viewSong($song)
@@ -264,7 +263,7 @@ function viewSong($song)
     $sql1 = doSQL('SELECT * from songs where title="' . $song . '"', array());
     if ($song == "Chanson" or !isset($song)) {
         echo '<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 list">
-            <form action="sendPost.php" method="post" enctype="multipart/form-data">
+            <form action="../controller/sendPost.php" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="task" value="addSong">
                 <input type="text" name="song" id="song" value="" placeholder="Titre de la chanson">
                 <input type="text" name="style" id="style" value="" placeholder="Style">
@@ -276,7 +275,7 @@ function viewSong($song)
     } else {
         foreach ($sql1 as $row1) {
             echo '<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 list">
-            <form action="sendPost.php" method="post" enctype="multipart/form-data">
+            <form action="../controller/sendPost.php" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="task" value="updateSong">
                 <input type="hidden" name="id" value="' . $row1["id"] . '">
                 <input type="text" name="song" value="' . $row1["title"] . '" placeholder="Titre de la chanson">
@@ -288,7 +287,7 @@ function viewSong($song)
         </div>
         <br><br>
         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 list">
-            <form action="sendPost.php" method="post" enctype="multipart/form-data">
+            <form action="../controller/sendPost.php" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="task" value="addSongFile">
                 <input type="hidden" name="song" value="' . $row1["title"] . '">
                 <input type="file" name="file" id="file" value="">
@@ -302,12 +301,12 @@ function viewSong($song)
                 <input type="text" name="file" id="file" value="' . $row["file"] . '">';
             if (strchr($row["file"], "mp3")) {
                 echo '<audio controls>
-                            <source src="./public/songs/' . $row["song"] . '/' . $row["file"] . '" type="audio/mp3">
+                            <source src="../public/songs/' . $row["song"] . '/' . $row["file"] . '" type="audio/mp3">
                         </audio>';
             } else {
-                echo '<a href="./public/songs/' . $row["song"] . '/' . $row["file"] . '" download>Télécharger le document</a>';
+                echo '<a href="../public/songs/' . $row["song"] . '/' . $row["file"] . '" download>Télécharger le document</a>';
             }
-            echo '<form action="sendPost.php" method="post" enctype="multipart/form-data">
+            echo '<form action="../controller/sendPost.php" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="task" value="deleteSongFile">
                 <input type="hidden" name="id" value="' . $row['id'] . '">
                 <input type="hidden" name="song" value="' . $row['song'] . '">
@@ -329,7 +328,7 @@ function viewStyle($style)
     $sql = doSQL('SELECT * from songs where style="' . $style . '"', $params);
     foreach ($sql as $row) {
         echo '<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 list">
-                <form action="sendPost.php" method="post" enctype="multipart/form-data">
+                <form action="../controller/sendPost.php" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="task" value="viewSong">
                 <input type="text" name="song" value="' . $row["title"] . '">
                 <input type="text" name="style" value="' . $row["style"] . '">
@@ -351,7 +350,7 @@ function viewSpeed($speed)
     $sql = doSQL('SELECT * from songs where speed="' . $speed . '"', $params);
     foreach ($sql as $row) {
         echo '<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 list">
-                <form action="sendPost.php" method="post" enctype="multipart/form-data">
+                <form action="../controller/sendPost.php" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="task" value="viewSong">
                 <input type="text" name="song" value="' . $row["title"] . '">
                 <input type="text" name="style" value="' . $row["style"] . '">
@@ -373,7 +372,7 @@ function viewDifficult($difficult)
     $sql = doSQL('SELECT * from songs where difficult="' . $difficult . '"', $params);
     foreach ($sql as $row) {
         echo '<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 list">
-                <form action="sendPost.php" method="post" enctype="multipart/form-data">
+                <form action="../controller/sendPost.php" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="task" value="viewSong">
                 <input type="text" name="song" value="' . $row["title"] . '">
                 <input type="text" name="style" value="' . $row["style"] . '">

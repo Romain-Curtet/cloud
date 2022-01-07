@@ -1,17 +1,17 @@
 <?php
 session_start();
 if (!isset($_SESSION["isConnected"]) || $_SESSION["login"] != "R&S-CURT") {
-    header("Location: index.php");
+    header("Location: ../index.php");
 }
 require("header.php");
-require("db.php");
+require("../db.php");
 $sql = doSQL("SELECT * from products ORDER BY importance DESC, product ASC", array());
 ?>
 
 <body>
     <div class="container-list">
         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 list">
-            <form action="sendPost.php" method="post" enctype="multipart/form-data">
+            <form action="../controller/sendPost.php" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="task" value="addProducts">
                 <table class="table table-bordered">
                     <tr>
@@ -32,7 +32,7 @@ $sql = doSQL("SELECT * from products ORDER BY importance DESC, product ASC", arr
                 echo '<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 list">
                         <table class="table table-bordered table-products">
                             <tr>
-                            <form action="sendPost.php" method="post" enctype="multipart/form-data">
+                            <form action="../controller/sendPost.php" method="post" enctype="multipart/form-data">
                                 <td>
                                     <input type="text" name="product" id="product" value="' . $row["product"] . '">
                                 </td>
@@ -68,7 +68,7 @@ $sql = doSQL("SELECT * from products ORDER BY importance DESC, product ASC", arr
                                     
                                 </td>
                             </form>
-                            <form action="sendPost.php" method="post" enctype="multipart/form-data">
+                            <form action="../controller/sendPost.php" method="post" enctype="multipart/form-data">
                                 <td>
                                     <input type="hidden" name="task" value="checkProducts">
                                     <input type="hidden" name="id" value="' . $row["id"] . '">

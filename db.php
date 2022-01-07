@@ -19,6 +19,6 @@ function doSQL($sql, $listParam)
         $db = null;
         return $completeArray;
     } catch (PDOException $e) {
-        echo 'error : ' . $e->getMessage();
+        return "error : " . $e->getMessage();
     }
 }
